@@ -19,6 +19,8 @@ Route::post('/mahasiswa', [MahasiswaController::class, 'store'])->middleware('au
 // Route untuk menghapus data mahasiswa
 Route::delete('/mahasiswa/{id}', [MahasiswaController::class, 'destroy'])->name('mahasiswa.destroy');
 
+// Route Untuk mengeksport data ke Excel
+Route::get('/mahasiswa/export/excel', [MahasiswaController::class, 'exportExcel'])->name('mahasiswa-export-excel');
 
 // Route untuk Profile
 Route::middleware('auth')->group(function () {
