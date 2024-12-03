@@ -31,6 +31,7 @@
                                 <th class="border px-4 py-2">NPM</th>
                                 <th class="border px-4 py-2">Nama</th>
                                 <th class="border px-4 py-2">Prodi</th>
+                                <th class="border px-4 py-2">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -40,7 +41,15 @@
                                     <td class="border px-4 py-2">{{ $item->npm }}</td>
                                     <td class="border px-4 py-2">{{ $item->nama }}</td>
                                     <td class="border px-4 py-2">{{ $item->prodi }}</td>
-                        
+                                    <td class="border px-4 py-2">
+                                        <form action="{{ route('mahasiswa.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus data ini?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-700">
+                                                Hapus
+                                            </button>
+                                        </form>
+                                    </td>
                                 </tr>
                             @empty
                                 <tr>
