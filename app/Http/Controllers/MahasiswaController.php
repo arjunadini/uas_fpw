@@ -6,6 +6,7 @@ use App\Exports\MahasiswaExport;
 use Illuminate\Http\Request;
 use App\Models\Mahasiswa;
 use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 
 class MahasiswaController extends Controller
 {
@@ -63,34 +64,30 @@ class MahasiswaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+        public function edit($id)
     {
-        // Ambil data mahasiswa berdasarkan ID
         $mahasiswa = Mahasiswa::findOrFail($id);
-
-        // Tampilkan form edit
         return view('mahasiswa.edit', compact('mahasiswa'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        // Validasi data
-        $validated = $request->validate([
-            'npm' => 'required|max:15|unique:mahasiswa,npm,' . $id,
-            'nama' => 'required|string|max:255',
-            'prodi' => 'required|string|max:100',
+        $request->validate([
+            'npm' => 'required|max:20',
+            'nama' => 'required|max:255',
+            'prodi' => 'required|max:255',
         ]);
 
-        // Update data di database
         $mahasiswa = Mahasiswa::findOrFail($id);
-        $mahasiswa->update($validated);
+        $mahasiswa->update([
+            'npm' => $request->npm,
+            'nama' => $request->nama,
+            'prodi' => $request->prodi,
+        ]);
 
-        // Redirect dengan pesan sukses
-        return redirect()->route('mahasiswa.index')->with('success', 'Data mahasiswa berhasil diupdate!');
+        return redirect()->route('dashboard')->with('success', 'Data mahasiswa berhasil diperbarui!');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -105,8 +102,22 @@ class MahasiswaController extends Controller
         return redirect()->route('dashboard')->with('success', 'Data mahasiswa berhasil dihapus!');
     }
 
+    // fungsi untuk eksport ke excel
     public function exportExcel (){
     return Excel::download(new MahasiswaExport, 'mahasiswa.xlsx');
     }
+
+     // Fungsi untuk ekspor ke PDF
+     public function exportPdf()
+     {
+         // Mengambil data mahasiswa
+         $mahasiswa = Mahasiswa::all();
+ 
+         // Memanggil view yang akan di-render sebagai PDF
+         $pdf = FacadePdf::loadView('mahasiswa.pdf', compact('mahasiswa'));
+ 
+         // Menyimpan atau mengunduh PDF
+         return $pdf->download('mahasiswa.pdf');
+     }
 }
 

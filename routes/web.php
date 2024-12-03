@@ -22,6 +22,13 @@ Route::delete('/mahasiswa/{id}', [MahasiswaController::class, 'destroy'])->name(
 // Route Untuk mengeksport data ke Excel
 Route::get('/mahasiswa/export/excel', [MahasiswaController::class, 'exportExcel'])->name('mahasiswa-export-excel');
 
+// Route Untuk mengeksport data ke PDF
+Route::get('/mahasiswa/export/pdf', [MahasiswaController::class, 'exportPdf'])->name('mahasiswa-export-pdf');
+
+// Route untuk edit data mahasiswa
+Route::get('/mahasiswa/edit/{id}', [MahasiswaController::class, 'edit'])->name('mahasiswa.edit');
+Route::put('/mahasiswa/update/{id}', [MahasiswaController::class, 'update'])->name('mahasiswa.update');
+
 // Route untuk Profile
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
