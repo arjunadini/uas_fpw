@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-gray-800 dark:bg-gray-700 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <h2 class="mb-4 text-2xl font-bold text-white  border-blue-500 inline-block pb-1">
+                    <h2 class="mb-4 text-2xl font-bold text-white border-blue-500 inline-block pb-1">
                         Buat Data Mahasiswa
                     </h2><br>
 
@@ -23,7 +23,7 @@
                         @csrf
 
                         <div class="mb-4">
-                            <label for="npm" class="block text-sm font-medium text-white-700">NPM</label>
+                            <label for="npm" class="block text-sm font-medium text-white">NPM</label>
                             <input type="text" name="npm" id="npm" 
                                  class="mt-1 block w-full bg-gray-700 text-gray-200 border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" 
                                     placeholder="Masukkan NPM" pattern="\d*" required>
@@ -34,7 +34,7 @@
                         </div>
 
                         <div class="mb-4">
-                            <label for="nama" class="block text-sm font-medium text-white-700">Nama</label>
+                            <label for="nama" class="block text-sm font-medium text-white">Nama</label>
                             <input type="text" name="nama" id="nama" class="mt-1 block w-full bg-gray-700 text-gray-200 border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Masukkan Nama" required>
                             @error('nama')
                                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
@@ -42,7 +42,7 @@
                         </div>
 
                         <div class="mb-4">
-                            <label for="prodi" class="block text-sm font-medium text-white-700">Program Studi</label>
+                            <label for="prodi" class="block text-sm font-medium text-white">Program Studi</label>
                             <input type="text" name="prodi" id="prodi" class="mt-1 block w-full bg-gray-700 text-gray-200 border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Masukkan Program Studi" required>
                             @error('prodi')
                                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>

@@ -26,6 +26,8 @@ class MahasiswaExport implements FromCollection, WithHeadings
             'NPM',
             'Nama',
             'Program Studi',
+            'Created At',
+            'Updated At',
         ];
     }
 }

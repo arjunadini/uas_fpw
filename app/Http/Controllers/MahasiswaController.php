@@ -13,14 +13,16 @@ class MahasiswaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        // Ambil semua data mahasiswa dari database
-        $mahasiswa = Mahasiswa::all();
-        
-        // Tampilkan ke view
-        return view('dashboard', compact('mahasiswa'));
-    }
+    public function index(Request $request)
+{
+    $sortColumn = $request->get('sort', 'id'); // Default sort berdasarkan 'id'
+    $sortOrder = $request->get('order', 'asc'); // Default 'asc' jika tidak ada parameter
+
+    $mahasiswa = Mahasiswa::orderBy($sortColumn, $sortOrder)->get();
+
+    return view('dashboard', compact('mahasiswa', 'sortColumn', 'sortOrder'));
+}
+
 
     /**
      * Show the form for creating a new resource.

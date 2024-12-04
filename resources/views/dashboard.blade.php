@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-5">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
@@ -32,7 +32,7 @@
                             <button 
                                 type="button" 
                                 @click="open = !open" 
-                                class="bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 text-white font-semibold text-sm px-4 py-2 rounded-lg shadow-lg inline-flex items-center hover:from-blue-500 hover:via-blue-600 hover:to-blue-700 transition-all duration-300 transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2">
+                                class="bg-gradient-to-r from-green-600 via-green-500 to-green-700 text-white font-semibold text-sm px-4 py-2 rounded-lg shadow-lg inline-flex items-center hover:from-green-500 hover:via-green-600 hover:to-green-700 transition-all duration-300 transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2">
                                 <span>Export</span>
                                 <svg class="ml-2 -mr-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" stroke="currentColor" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7l7 7 7-7"></path>
@@ -61,8 +61,52 @@
                             </div>
                         </div>
                     </div>
-                    
 
+                  <!-- Tombol Urut Berdasarkan -->
+                    <div x-data="{ open: false }" class="relative inline-block text-left">
+                        <div>
+                            <button 
+                                type="button" 
+                                @click="open = !open" 
+                                class="bg-gradient-to-r from-blue-600 via-blue-600 to-blue-500 text-white font-semibold text-sm px-4 py-2 rounded-lg shadow-lg inline-flex items-center hover:from-blue-500 hover:via-blue-600 hover:to-blue-700 transition-all duration-300 transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2">
+                                <span>Urut Berdasarkan</span>
+                                <svg class="ml-2 -mr-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7l7 7 7-7"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        
+                        <!-- Dropdown menu -->
+                        <div 
+                            x-show="open" 
+                            @click.outside="open = false" 
+                            x-transition:enter="transition ease-out duration-200" 
+                            x-transition:enter-start="opacity-0 scale-95" 
+                            x-transition:enter-end="opacity-100 scale-100" 
+                            x-transition:leave="transition ease-in duration-75" 
+                            x-transition:leave-start="opacity-100 scale-100" 
+                            x-transition:leave-end="opacity-0 scale-95" 
+                            class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-xl bg-white ring-1 ring-black ring-opacity-5">
+                            <div class="py-1">
+                                 <!-- Urut Nama -->
+                                 <a href="{{ route('dashboard', ['sort' => 'nama', 'order' => $sortColumn === 'nama' && $sortOrder === 'asc' ? 'desc' : 'asc']) }}" 
+                                    class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 hover:text-green-500 transition-colors">
+                                     Urut Nama : {{ $sortColumn === 'nama' && $sortOrder === 'asc' ? 'Z-A' : 'A-Z' }}
+                                 </a>
+                                  <!-- Urut NPM -->
+                                <a href="{{ route('dashboard', ['sort' => 'npm', 'order' => $sortColumn === 'npm' && $sortOrder === 'asc' ? 'desc' : 'asc']) }}" 
+                                    class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 hover:text-green-500 transition-colors">
+                                     Urut NPM : {{ $sortColumn === 'npm' && $sortOrder === 'asc' ? 'Z-A' : 'A-Z' }}
+                                 </a>
+                                <!-- Urut Nomor -->
+                                <a href="{{ route('dashboard', ['sort' => 'id', 'order' => $sortColumn === 'id' && $sortOrder === 'asc' ? 'desc' : 'asc']) }}" 
+                                   class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 hover:text-green-500 transition-colors">
+                                    Urut Nomor : {{ $sortColumn === 'id' && $sortOrder === 'asc' ? 'Z-A' : 'A-Z' }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>                    
+                    
                     <br><br>
 
                     <table class="table-auto w-full border-collapse border border-gray-300 text-sm text-center">
