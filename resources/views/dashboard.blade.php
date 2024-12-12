@@ -14,7 +14,7 @@
                     </h2><br>
 
                     @if (session('success'))
-                        <div class="mb-4 text-green-500">
+                        <div id="flash-message" class="mb-4 text-green-500">
                             {{ session('success') }}
                         </div>
                     @endif
@@ -161,4 +161,16 @@
         </div>
     </div>
 </x-app-layout>
+
 <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
+<script>
+    // Tunggu 2 detik, lalu sembunyikan pesan flash
+    setTimeout(() => {
+        const flashMessage = document.getElementById('flash-message');
+        if (flashMessage) {
+            flashMessage.style.transition = 'opacity 0.5s';
+            flashMessage.style.opacity = '0'; // Efek fade-out
+            setTimeout(() => flashMessage.remove(), 500); // Hapus elemen setelah fade-out
+        }
+    }, 3000); // 3000 ms = 3 detik
+</script>
